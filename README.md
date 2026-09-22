@@ -5,6 +5,13 @@
 **Arquivo principal:** `ph/ph.ino`  
 **Finalidade:** medir o pH de uma solução, acompanhar sua temperatura e apresentar os resultados em um display LCD.
 
+## Versões do firmware
+
+- `ph/ph.ino`: versão original do protótipo.
+- `ph_v2/ph_v2.ino`: segunda versão para Arduino Nano, com telas de inicialização, leitura da temperatura antes do pH, média de dez amostras analógicas, atualização segura do LCD e indicação de falha do sensor de temperatura.
+
+Para utilizar a segunda versão, abra `ph_v2/ph_v2.ino` na Arduino IDE, selecione **Arduino Nano**, escolha o processador correspondente ao bootloader da placa e grave o programa. Os coeficientes `INCLINACAO_PH` e `OFFSET_PH` são valores iniciais e devem ser ajustados com soluções tampão antes de medições quantitativas.
+
 ## 1. Visão geral
 
 O projeto implementa um instrumento eletrônico de bancada para monitoramento de pH. O sistema recebe o sinal de uma sonda de pH por meio de um módulo condicionador analógico, converte esse sinal com o conversor analógico-digital do Arduino, mede a temperatura com um termopar conectado a um MAX6675 e mostra pH e temperatura em um display LCD 16 × 2 com interface I²C.
