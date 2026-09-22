@@ -1,7 +1,7 @@
 # Documentação técnica — Sistema de medição de pH
 
 **Projeto:** `marcelomaurin/ph`  
-**Plataforma:** Arduino  
+**Plataforma:** Arduino Nano clássico (ATmega328P, 5 V)  
 **Arquivo principal:** `ph/ph.ino`  
 **Finalidade:** medir o pH de uma solução, acompanhar sua temperatura e apresentar os resultados em um display LCD.
 
@@ -15,7 +15,7 @@ O firmware também recebe comandos pela porta serial e grava um valor de calibra
 
 1. **Sonda de pH:** transforma a atividade dos íons hidrogênio em uma diferença de potencial elétrico.
 2. **Módulo condicionador de pH:** apresenta alta impedância de entrada, amplifica e desloca o pequeno sinal da sonda para uma faixa aceita pelo Arduino.
-3. **Arduino:** realiza a conversão analógico-digital, filtra amostras, calcula o resultado e coordena os periféricos.
+3. **Arduino Nano:** realiza a conversão analógico-digital, filtra amostras, calcula o resultado e coordena os periféricos.
 4. **MAX6675 e termopar tipo K:** medem a temperatura da solução ou de seu entorno.
 5. **LCD 16 × 2 I²C:** apresenta o pH e a temperatura.
 6. **EEPROM e porta serial:** permitem armazenar e configurar parâmetros de calibração.
@@ -73,7 +73,7 @@ O termopar e a sonda devem estar em equilíbrio térmico com a mesma amostra. Pa
 
 ## 4. Componentes necessários
 
-- Arduino Uno, Nano ou placa compatível com ADC de 10 bits e lógica de 5 V;
+- Arduino Nano clássico, baseado no ATmega328P, com ADC de 10 bits e lógica de 5 V;
 - sonda combinada de pH com conector compatível;
 - módulo condicionador/amplificador para sonda de pH, com saída analógica de 0 a 5 V;
 - módulo MAX6675;
@@ -98,8 +98,8 @@ As ligações abaixo foram deduzidas diretamente das definições presentes no f
 | MAX6675 | SCK/CLK | D13 | Relógio serial |
 | MAX6675 | VCC | 5 V ou 3,3 V | Conforme o módulo utilizado |
 | MAX6675 | GND | GND | Terra comum |
-| LCD I²C | SDA | SDA da placa | No Uno/Nano clássico corresponde a A4 |
-| LCD I²C | SCL | SCL da placa | No Uno/Nano clássico corresponde a A5 |
+| LCD I²C | SDA | A4 | Barramento I²C do Arduino Nano clássico |
+| LCD I²C | SCL | A5 | Barramento I²C do Arduino Nano clássico |
 | LCD I²C | VCC | 5 V | Verificar o backpack I²C |
 | LCD I²C | GND | GND | Terra comum |
 
@@ -113,6 +113,7 @@ As ligações abaixo foram deduzidas diretamente das definições presentes no f
 - Evite protoboard suja ou úmida na entrada de alta impedância.
 - Em uma placa definitiva, separe a seção analógica da digital e use desacoplamento de 100 nF próximo aos módulos.
 - Se a solução puder estar eletricamente ligada a bombas, resistências ou outros equipamentos, avalie isolamento galvânico.
+- Esta pinagem considera o Arduino Nano clássico com ATmega328P. Arduino Nano Every, Nano 33 e outras variantes podem usar outra arquitetura, tensão lógica ou referência analógica e devem ser conferidos separadamente.
 
 ## 6. Montagem passo a passo
 
@@ -268,4 +269,3 @@ O projeto reúne os elementos essenciais de um medidor didático de pH: transdu�
 - Página citada pelo README original: <https://www.usinainfo.com.br/blog/sensor-de-ph-arduino-como-calibrar-e-configurar/>
 - Equação de Nernst e fundamentos de eletroquímica em livros-texto de química analítica e eletroquímica.
 - Folhas de dados do microcontrolador da placa Arduino, do MAX6675, do módulo LCD I²C e do condicionador de pH efetivamente utilizados na montagem.
-
